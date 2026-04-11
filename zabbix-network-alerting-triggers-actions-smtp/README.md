@@ -190,7 +190,7 @@ In the .config file, we update these lines to associated Zabbix server network i
 <br>ServerActive=<ZABBIX_SERVER_IP>
 <br>Hostname=<THIS_HOST_NAME>
 
-We use this command to enter .conf file, so we can edit the config for our Zabbix server which lives on the server VM. 
+We use this command to enter .conf file, so we can edit the config of our agents so they know where to send information and report to home base.  
 
 ```
 sudo nano /etc/zabbix/zabbix_agentd.conf
