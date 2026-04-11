@@ -24,15 +24,13 @@ Deploy a functional Zabbix network monitoring environment on Ubuntu
 Monitor CPU and RAM utilization on hosts by spiking the load with Linux stress-ng CLI tool 
 Test Zabbix host agent process down / not available 
 Utilize iperf3 Linux CLI tool to generate interface traffic on both hosts
-
-
 <br>
 
 ### Virtual Machines:
 
 Ubuntu 64-bit VM1 with Zabbix Server running on backend, with web GUI frontend. 
-<br>Ubuntu 64-bit monitored VM2 running with Zabbix agent (acting as host) 
-<br>Ubuntu 64-bit monitored VM3 running with Zabbix agent (acting as host)
+<br>Ubuntu 64-bit monitored host1 running with Zabbix agent (acting as host) 
+<br>Ubuntu 64-bit monitored host2 running with Zabbix agent (acting as host)
 
 Zabbix server dashboard
 
