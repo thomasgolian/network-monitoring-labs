@@ -63,7 +63,7 @@ sudo dpkg -i zabbix-release_latest_6.0+ubuntu24.04_all.deb
 sudo apt update
 ```
 
-![Zabbix Repo](images/zabbix-repo-download.jpg)
+<img src="images/zabbix-repo-download.jpg" width="650">
 
 ## Install Zabbix + MySQL + Apache
 
@@ -102,7 +102,7 @@ On the MySQL CLI, we do a sanity check to make sure DB is working properly and p
 
 mysql> SHOW TABLES;
 
-![MySQL Tables](images/mysql-tables.jpg)
+<img src="images/mysql-tables.jpg" width="450">
 
 We will add our password to the Zabbix server config daemon process. Remove has # symbol, and add password, exit & 'Y' to save. 
 
@@ -110,7 +110,7 @@ We will add our password to the Zabbix server config daemon process. Remove has 
 sudo nano /etc/zabbix/zabbix_server.conf
 ```
 
-![Config-Daemon](images/config-daemon.jpg)
+<img src="images/config-daemon.jpg" width="650">
 
 Now we still start Zabbix services:
 
@@ -126,7 +126,7 @@ We want to enable Zabbix server to start on each boot:
 sudo systemctl enable zabbix-server
 ```
 
-![Start Boot](images/enable-on-boot.jpg)
+<img src="images/enable-on-boot.jpg" width="650">
 
 ![Enabled](images/start-boot.jpg)
 
@@ -144,12 +144,12 @@ The default admin and pass for Zabbix server when you login is:
 
 Now we can begin configuring monitoring in the GUI:
 
-![UI](images/zabbix-frontend.jpg)
+<img src="images/zabbix-frontend.jpg" width="650">
 
 
 We want to test SMTP email notifications so we configure this first. Port 587. STARTTLS. We also had to use Google's 'App Password' feature for SMTP and we use that App password for the 'password field' in this case to authenticate with smtp@gmail.com. 
 
-![SMTP](images/smtp-config.jpg)
+<img src="images/smtp-config.jpg" width="650">
 
 ****************************************************************************************************************
 
@@ -165,7 +165,7 @@ sudo apt upgrade -y
 ![Update](images/apt-update.jpg)
 
 
-![Upgrade](images/apt-upgrade.jpg)
+<img src="images/apt-upgrade.jpg" width="650">
 
 
 The version of Ubuntu is 24.04.4 and we need the Zabbix repository to be installed before the agent:
@@ -201,7 +201,7 @@ We update each .conf file on both monitored hosts (guest VMs). This will allow t
 <br>ServerActive=<192.168.187.129>
 <br>Hostname=<ubuntu-host-1>
 
-![Agent Conf](images/agent-conf2.jpg)
+<img src="images/agent-conf2.jpg" width="650">
 
 ### Our Zabbix server is reachable at inet 192.168.187.129/24
 
@@ -229,7 +229,7 @@ sudo systemctl status zabbix-agent
 We want to check interfaces on the Linux guests, we run ifconfig (install net-tools if needed). We are using NAT so our VMs can get connectivity
 through the host machine running our VM. We ping 8.8.8.8 to make sure we can get out. 
 
-![Net Tools](images/net-tools-ifconfig.jpg)
+<img src="images/net-tools-ifconfig.jpg" width="650">
 
 We head back over to Zabbix server VM and now we need to add 2 new hosts (the VMs we're monitoring)
 
@@ -256,7 +256,7 @@ Next, we want to make sure our agents are running and communicating with the ser
 
 We will use 'Linux by Zabbix agent' as the template to add. See below:
 
-![Template Fix](images/agent-template.jpg)
+<img src="images/agent-template.jpg" width="650">
 
 We are making progress but the ZBX 'Availability' icon is red, but we need it to be green, so something is still off:
 
@@ -294,7 +294,7 @@ yes > /dev/null &
 yes > /dev/null &
 ```
 
-![Latest Data](images/yes-cpu-flood.jpg)
+<img src="images/yes-cpu-flood.jpg" width="650">
 
 We can also look outside VMware to see my bare metal host machine's CPU utilizing 14% from the 2 cores provisioned on VM1 being flooded at 100% utilization. 
 
@@ -330,7 +330,7 @@ Name: High CPU utilization (>70% for 1m)
 <br>Function = 
 <br>Last of (T) = 1m
 
-![Trigger](images/trigger-config.jpg)
+<img src="images/trigger-config.jpg" width="650">
 
 
 Now that we have the trigger configured, we will again hammer ubuntu-host-1 with the 'yes' process flood to put load on it's CPU. 
