@@ -45,7 +45,7 @@ Zabbix server dashboard
 
 Install a Ubuntu VM or another distro - In this project we are using VMware Workstation with 4 CPU cores, 8GB RAM, 50GB storage, NAT network access with host machine.
 
-![Install Ubuntu](images/install-ubuntu-vmware.jpg)
+<img src="install-ubuntu-vmware.jpg" width="650">
 
 First we update the apt catalog by running:
 
