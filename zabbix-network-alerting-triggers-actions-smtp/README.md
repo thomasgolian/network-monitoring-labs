@@ -271,8 +271,7 @@ We may have found issue after troubleshooting. Running this command on host 1:
 sudo tail -f /var/log/zabbix/zabbix_agentd.log
 ```
 
-Ironically, in the end, it was a simple IP address typo. This is a great example of how you can spend a lot of time
-troubleshooting advanced issues, when in reality it was a simple config mistake missing 1 digit in the IP address. *Whoops*
+I also made a silly typo when entering the IP addresses. Resolved.
 
 We can see the agents are now 'green' and connecting successfully to our Zabbix server.
 
