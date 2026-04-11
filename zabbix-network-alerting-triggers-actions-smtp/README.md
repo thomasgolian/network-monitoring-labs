@@ -197,9 +197,9 @@ sudo nano /etc/zabbix/zabbix_agentd.conf
 ```
 
 We update each .conf file on both monitored hosts (guest VMs). This will allow the agent to speak to the server. 
-<br>Server=<192.168.187.129>
-<br>ServerActive=<192.168.187.129>
-<br>Hostname=<ubuntu-host-1>
+<br>Server = 192.168.187.129
+<br>ServerActive = 192.168.187.129
+<br>Hostname = ubuntu-host-1
 
 <img src="images/agent-conf2.jpg" width="650">
 
