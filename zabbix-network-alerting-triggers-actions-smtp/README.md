@@ -299,11 +299,11 @@ yes > /dev/null &
 
 <img src="images/yes-cpu-flood.jpg" width="650">
 
-We can also look outside VMware to see my bare metal host machine's CPU utilizing 14% from the 2 cores provisioned on VM1 being flooded at 100% utilization. 
+We can also look outside VMware to see my bare metal host machine's CPU utilizing 14% from the 2 cores provisioned on host-1 being flooded to 100% utilization. 
 
 ![CPU Load](images/vmware-cpu-load2.jpg)
 
-We can monitor ubuntu-host-1 and see it's CPU utilization is holding at 100%. This confirms our Zabbix environment is operating as intended.
+We can monitor host-1 to see it's CPU utilization is holding at 100%. This confirms our Zabbix environment is operating as intended.
 
 ![Holding 100](images/holding-100.jpg)
 
@@ -321,9 +321,9 @@ In Zabbix we can see the agent has reported back to the server, letting us know 
 
 <br>
 
-## Now we create a trigger for ubuntu-host-1 and ubuntu-host-2. 
+## Create a trigger for ubuntu-host-1 and ubuntu-host-2. 
 
-Configuration → Hosts → we click ubuntu-host-{x} → Triggers → Create trigger
+Configuration → Hosts → click ubuntu-host-{x} → Triggers → Create trigger
 
 ![Create Trigger](images/create-trigger.jpg)
 
@@ -335,7 +335,6 @@ Name: High CPU utilization (>70% for 1m)
 
 <img src="images/trigger-config.jpg" width="650">
 
-
 Now that we have the trigger configured, we will again hammer ubuntu-host-1 with the 'yes' process flood to put load on it's CPU. 
 
 Right away the agent on ubuntu-host-1 detects the condition that activates the trigger. The triggered event is now highlighted and blinking
@@ -343,21 +342,21 @@ on the main Zabbix dashboard screen under 'Problems'.
 
 ![Triggered1](images/triggered1.jpg)
 
-We didn't configure the following - but during set up - there are existing triggers already built-in to the template we chose.
+We didn't configure the following - but during set up there were existing triggers already built-in to the template we chose.
 
-Unexpectedly, we see another trigger alert pop up, and it's telling us the CPU average load is too high. 
+Unexpectedly, another trigger alert pops up, and it's telling us the CPU average load is too high. 
 
 ![Trigger](images/default-triggered1.jpg)
 
 We kill all the processes again and the flashing alerts on the Zabbix dashboard disappear moments later, as the CPU is no longer under any load. 
 
-Next we'll configure an 'Action' to send an 'Alert' via SMTP Email configuration we did earlier. 
+Next we configure an 'Action' to send an 'Alert' via the SMTP Email configuration we saved earlier. 
 
 Configuration > Actions > Trigger Actions > Create action
 
 ![Trigger](images/action-trigger-cpu.jpg)
 
-Under the Operations tab, we now have to add the Email action. We want to receive an email alert for our desired trigger, in this case the high CPU utilization on the ubuntu-host-1 VM. 
+Under the Operations tab, we add the Email action. We want to receive an email alert for our desired trigger, in this case, the high CPU utilization on the ubuntu-host-1.
 
 ![Operation](images/operation-email.jpg)
 
@@ -367,7 +366,7 @@ Under the Operations tab, we now have to add the Email action. We want to receiv
 
 ## Testing our SMTP alerting
 
-Let's again throw a flood of processes on ubuntu-host-1 to put it's CPU on 100% load. We hope to have the trigger event to occur and for the configured trigger action to send an email alert to my Email inbox. All three virtual machines have internet connectivity so it should work in theory.
+Let's again throw a flood of processes on ubuntu-host-1 to put it's CPU on 100% load. We hope to have the trigger event to occur and the configured trigger action to send an email alert to my Email inbox.
 
 On first try the Email alert failed: 
 
@@ -387,7 +386,7 @@ Attempt 2: Whoops, we must have made a mistake with the SMTP Gmail App Password 
 
 Created a fresh App password for the Zabbix server to use when sending an Email alert and using SMTP to authenticate with Google's servers.
 
-Ran the test again and success this time! You can see Zabbix confirming Email was sent, and I received the alert in the Gmail inbox. 
+Ran the test again and success this time. You can see Zabbix confirming Email was sent, and I received the alert in the Gmail inbox. 
 
 ![Success](images/email-sent.jpg)
 
@@ -395,10 +394,9 @@ Ran the test again and success this time! You can see Zabbix confirming Email wa
 
 ![Success](images/alert-gmail.jpg)
 
+## Simulating a failure / lack of communication from Zabbix agent on host 2
 
-## Let's simulate a failure / lack of communication from Zabbix agent on host 2
-
-We'll run this command on ubuntu-host-2 to simulate a loss of connectivity and/or communication from the agent to the server.
+Run this command on ubuntu-host-2 to simulate a loss of connectivity and/or communication from the agent to the server.
 
 ```
 sudo systemctl stop zabbix-agent
@@ -410,7 +408,7 @@ Similar to before, Zabbix detects the agent is down / not available on ubuntu-ho
 
 We'll bring the agent back up and alive again. 
 
-## Next we'll try flooding the RAM memory of the host in hopes to see if the agent detects any conditions from the default, pre-set Zabbix Linux agent triggers.
+## Next we flood the RAM memory of the host in hopes to see if the agent detects any conditions from the default, pre-set Zabbix Linux agent triggers.
 
 Install 'stress' (The stress command is a command-line utility for Linux and Unix-like systems used to impose artificial, configurable load on CPU, memory, <br>I/O, and disk subsystems. It helps administrators test system stability, thermal management, and identify performance bottlenecks by simulating high-load <br>scenarios, though it is not a benchmarking tool.) *Stress-ng is newer version* 
 
@@ -433,7 +431,6 @@ We will open a second terminal tab to run this command to watch RAM memory utili
 ```
 watch -n 1 free -m
 ```
-
 Available RAM should be ~2500 bytes. After running the stress-ng hog process, we can see the avail. memory getting hit down to ~440 bytes:
 
 ![Low RAM](images/low-ram.jpg)
@@ -446,7 +443,7 @@ After running the stress command we get a trigger and problem occurring on ubunt
 
 <br>
 
-## We're going to use Linux CLI tool 'iperf3' to manually throw traffic through our network interfaces to observe those metrics in Zabbix server:
+## We're going to use CLI tool 'iperf3' to manually throw traffic through the network interfaces to observe metrics in Zabbix server:
 
 ```
 sudo apt update
@@ -461,8 +458,8 @@ Before testing, we can view host interfaces metrics by navigating to Monitoring 
 
 ![Latest Data](images/latestdata-interface.jpg)
 
-We can also view network traffic visually on a graph. We'll use the pre-built graphs. Before that we will also change how often Zabbix is receiving network
-information from the agent. The 'interval'. We navigate to Configuration > Templates > Linux by Zabbix agent (the agent we're using) > Discovery rules > Network interface discovery:
+We can also view network traffic visually on a graph. We'll use the pre-built graphs. Before that we will change how often Zabbix is receiving network
+statistics from the agent. The 'interval'. We navigate to Configuration > Templates > Linux by Zabbix agent (the agent we're using) > Discovery rules > Network interface discovery:
 
 ![Discovery](images/discovery-interval.jpg)
 
@@ -474,7 +471,7 @@ We may also have to change the host's 'network interface discovery' interval to 
 
 ![Interval](images/5s-interval2.jpg)
 
-We'll run this cryptic-looking bash shell loop on host2's terminal - sending a dynamic traffic pattern to host1. Bits sent & bits received, respectively. We can visually see the network traffic passing between the virtual machines, and each agent is providing Zabbix server with the data so we can monitor.
+We'll run this cryptic-looking bash shell loop on host2's terminal - sending a dynamic traffic pattern to host1. Bits sent & bits received, respectively. We can visually see the network traffic passing between the virtual machines, and each agent is providing Zabbix server with the data so we can monitor. The Y axis jumps to measurements in Gbps (It was Kbps before). 
 
 ```
 while true; do
@@ -486,7 +483,7 @@ done
 
 ```
 
-We can also use something simple like:
+Or
 
 ```
 iperf3 -c <HOST_1_IP> -t 120 -P 8
