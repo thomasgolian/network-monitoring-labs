@@ -497,12 +497,12 @@ iperf3 -c <HOST_1_IP> -t 120 -P 8
 ## Key Takeaways
 
 I configured SMTP auth (TLS, ports, app passwords)
-Integrated it into a monitoring workflow
-Debugged failed delivery + user media config
-Validated alerts with live system conditions
-Built a fully functional Zabbix monitoring environment with server and agent-based hosts
-Successfully configured custom triggers for CPU and memory utilization
-Implemented SMTP email alerting using Gmail with app password authentication
+<br>Integrated it into a monitoring workflow
+<br>Debugged failed delivery + user media config
+<br>Validated alerts with live system conditions
+<br>Built a fully functional Zabbix monitoring environment with server and agent-based hosts
+<br>Successfully configured custom triggers for CPU and memory utilization
+<br>Implemented SMTP email alerting using Gmail with app password authentication
 
 Learned to troubleshoot real issues including:
 <br>SMTP authentication failures
