@@ -298,7 +298,7 @@ yes > /dev/null &
 
 We can also look outside VMware to see my bare metal host machine's CPU utilizing 14% from the 2 cores provisioned on VM1 being flooded at 100% utilization. 
 
-![CPU Load](images/vmware-cpu-load.jpg)
+![CPU Load](images/vmware-cpu-load2.jpg)
 
 We can monitor ubuntu-host-1 and see it's CPU utilization is holding at 100%. This confirms our Zabbix environment is operating as intended.
 
