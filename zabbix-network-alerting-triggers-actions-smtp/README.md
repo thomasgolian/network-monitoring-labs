@@ -2,7 +2,7 @@
 
 <br>
 
-![VMs](3vms.jpg)
+![VMs](images/3vms.jpg)
 
 ## Overview:
 
@@ -40,7 +40,7 @@ Zabbix server dashboard
 
 2 Monitored VM hosts
 
-![Hosts](2vm-hosts.jpg)
+![Hosts](images/2vm-hosts.jpg)
 
 
 # Zabbix server installation:
