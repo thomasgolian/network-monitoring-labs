@@ -6,31 +6,35 @@
 
 ## Overview:
 
-This lab demonstrates the setup of a basic Zabbix monitoring and alerting system. It includes configuring a monitored host (guest VM), collecting metrics, defining trigger conditions, and sending email notifications using SMTP. The goal is to understand how Zabbix detects issues and generates alerts based on system performance data. We are using Zabbix Server on Ubuntu - along with two other Ubuntu VM hosts/clients. 
+This lab demonstrates the setup of a basic Zabbix monitoring and alerting system. It includes configuring a monitored host, collecting metrics, defining trigger conditions, and sending email notifications using SMTP. The goal is to understand how Zabbix detects issues and generates alerts based on system performance data.
 
 ## Objectives:
 
 Deploy a functional Zabbix network monitoring environment on Ubuntu
 <br>Configure and register monitored hosts
-<br>Collect system metrics (e.g., CPU, memory, or availability)
+<br>Collect system metrics (e.g., CPU, memory, network or availability)
 <br>Create triggers to detect defined threshold conditions
 <br>Configure actions to respond to trigger events
 <br>Set up SMTP for email-based alerting
 <br>Validate alerting by simulating a failure or threshold breach
-<br>Understand the end-to-end flow of monitoring data to alert notification
+<br>Understand the end-to-end flow from monitoring data to alert notifications
 
 ## Test Scenarios with Triggers, Actions, & Email Alerts
 
 Monitor CPU and RAM utilization on hosts by spiking the load with Linux stress-ng CLI tool 
-Test Zabbix host agent process down / not available 
-Utilize iperf3 Linux CLI tool to generate interface traffic on both hosts
+Test Zabbix server detecting when the host agent is down / not reachable 
+Utilize iperf3 and Bash CLI tools to generate interface traffic on both hosts
 <br>
 
 ### Virtual Machines:
 
-Ubuntu 64-bit VM1 with Zabbix Server running on backend, with web GUI frontend. 
-<br>Ubuntu 64-bit monitored host1 running with Zabbix agent (acting as host) 
-<br>Ubuntu 64-bit monitored host2 running with Zabbix agent (acting as host)
+Ubuntu Zabbix Server running on backend, with web GUI frontend
+<br>monitored host1 & host2 running with Zabbix agents (acting as hosts)
+
+Hostnames:
+Ubuntu-Zabbix-server
+<br>ubuntu-host-1
+<br>ubuntu-host-2
 
 Zabbix server dashboard
 
@@ -41,7 +45,7 @@ Zabbix server dashboard
 ![Hosts](images/2vm-hosts.jpg)
 
 
-# Zabbix server installation:
+# Zabbix Server Installation:
 
 Install a Ubuntu VM or another distro - In this project we are using VMware Workstation with 4 CPU cores, 8GB RAM, 50GB storage, NAT network access with host machine.
 
@@ -104,7 +108,7 @@ mysql> SHOW TABLES;
 
 <img src="images/mysql-tables2.jpg" width="550">
 
-We will add our password to the Zabbix server config daemon process. Remove has # symbol, and add password, exit & 'Y' to save. 
+We will add our password to the Zabbix server config daemon. Remove has # symbol, and add password, exit & 'Y' to save. 
 
 ```
 sudo nano /etc/zabbix/zabbix_server.conf
@@ -155,7 +159,7 @@ We want to test SMTP email notifications so we configure this first. Port 587. S
 
 ## Before going back to the server, we want to get our monitored VMs ready:
 
-We do quick Linux updates for the freshly mounted VM hosts
+We run quick updates:
 
 ```
 sudo apt update
@@ -168,7 +172,7 @@ sudo apt upgrade -y
 <img src="images/apt-upgrade.jpg" width="650">
 
 
-The version of Ubuntu is 24.04.4 and we need the Zabbix repository to be installed before the agent:
+This version of Ubuntu is 24.04.4 and we need the Zabbix repository to be installed before the agent:
 
 
 ![Zabbix](images/zabbix-repo.jpg)
@@ -196,7 +200,7 @@ We use this command to enter .conf file, so we can edit the config of our agents
 sudo nano /etc/zabbix/zabbix_agentd.conf
 ```
 
-We update each .conf file on both monitored hosts (guest VMs). This will allow the agent to speak to the server. 
+We update each .conf file on both monitored Zabbix hosts. This will allow the agent to speak to the server. 
 <br>Server = 192.168.187.129
 <br>ServerActive = 192.168.187.129
 <br>Hostname = ubuntu-host-{}
@@ -205,7 +209,7 @@ We update each .conf file on both monitored hosts (guest VMs). This will allow t
 
 ### Our Zabbix server is reachable at inet 192.168.187.129/24
 
-All VM guests are able to reach host machine and internet. IP addresses for all 3 VMS:
+IP addresses for all 3 VMS:
 <br>Zabbix Server  = 192.168.187.129/24
 <br>ubunutu-host-1 = 192.168.187.132/24
 <br>ubunutu-host-2 = 192.168.187.123/24
@@ -226,19 +230,18 @@ sudo systemctl status zabbix-agent
 
 ![Agent Status](images/agent-status.jpg)
 
-We want to check interfaces on the Linux guests, we run 'ifconfig' or 'ip a'(install net-tools if needed). We are using NAT so our VMs can get connectivity
-through the host machine running our VMs. We ping 8.8.8.8 to make sure we can get out. 
+We want to check interfaces on the Linux guests, we run 'ifconfig' or 'ip a'(install net-tools if needed). We are using NAT so our VMs have interconnectivity. Ping 8.8.8.8 to make sure we can get out. 
 
 <img src="images/net-tools-ifconfig.jpg" width="650">
 
-We head back over to Zabbix server VM and now we need to add 2 new hosts (the VMs we're monitoring)
+We head back over to Zabbix server and we need to add 2 new hosts (the machines we're monitoring)
 
 Config > Hosts > Create Host
 <br>We add the host name, add 'Linux servers' under the Group selection
 <br>Add the IP address of the VM
 <br>Port 10050
 
-We make sure each monitored host has a unique hostname - Zabbix won't like duplicate host names. 
+Make sure each monitored host has a unique hostname - Zabbix won't like duplicate host names. 
 
 ```
 sudo hostnamectl set-hostname ubuntu-host-1
@@ -247,7 +250,7 @@ sudo hostnamectl set-hostname ubuntu-host-2
 
 ![Create Host](images/create-host.jpg)
 
-Next, we want to make sure our agents are running and communicating with the server. Grey color means not connected:
+Next, we make sure our agents are communicating with the server. Grey color means not connected:
 
 ![ZBX Grey](images/agent-grey.jpg)
 
@@ -269,19 +272,19 @@ sudo tail -f /var/log/zabbix/zabbix_agentd.log
 ```
 
 Ironically, in the end, it was a simple IP address typo. This is a great example of how you can spend a lot of time
-troubleshooting advanced backend issues, when in reality it was a simple config mistake missing 1 digit in the IP address. Whoops.
+troubleshooting advanced issues, when in reality it was a simple config mistake missing 1 digit in the IP address. *Whoops*
 
 We can see the agents are now 'green' and connecting successfully to our Zabbix server.
 
 ![Green](images/zbx-green.jpg)
 
-### First we check to make sure our agents are sending frequent updates from the host machines. 
+### First we make sure our agents are sending frequent updates from the host machines. 
 
-We navigate to Monitoring > Latest Data > look for various data metrics and periodic value changes:
+Navigate to Monitoring > Latest Data > look for various data metrics and periodic value changes:
 
 ![Latest Data](images/latest-data.jpg)
 
-### Now we run a Linux command to stress and put the VM1's CPU under load - to see the CPU utilization difference updated in Zabbix:
+### Now we run a Linux command to stress and put host1's CPU under load - to see the CPU utilization difference updated in Zabbix:
 
 We run this command. The 'yes' process string is outputting 'Y' continuously - the /dev/null & throws the 'yes' away so it doesn't appear on screen and runs it in the background. 
 
