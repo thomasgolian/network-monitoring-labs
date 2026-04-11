@@ -554,8 +554,4 @@ iperf3 and bash shell tools worked as intended with Zabbix agents monitoring the
 
 *************************************************************************************************************************
 
-<br>
-
-
-![VMs](3vms.jpg)
 
