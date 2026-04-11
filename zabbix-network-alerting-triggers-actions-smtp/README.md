@@ -410,7 +410,7 @@ We'll bring the agent back up and alive again.
 
 ## Next we flood the RAM memory of the host in hopes to see if the agent detects any conditions from the default, pre-set Zabbix Linux agent triggers.
 
-Install 'stress' (The stress command is a command-line utility for Linux and Unix-like systems used to impose artificial, configurable load on CPU, memory, <br>I/O, and disk subsystems. It helps administrators test system stability, thermal management, and identify performance bottlenecks by simulating high-load <br>scenarios, though it is not a benchmarking tool.) *Stress-ng is newer version* 
+Install 'stress' (The stress command is a command-line utility for Linux and Unix-like systems used to impose artificial, configurable load on CPU, memory, I/O, and disk subsystems. It helps administrators test system stability, thermal management, and identify performance bottlenecks by simulating high-load <br>scenarios, though it is not a benchmarking tool.) *Stress-ng is newer version* 
 
 ```
 sudo apt install stress-ng -y
