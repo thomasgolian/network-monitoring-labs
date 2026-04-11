@@ -102,7 +102,7 @@ On the MySQL CLI, we do a sanity check to make sure DB is working properly and p
 
 mysql> SHOW TABLES;
 
-<img src="images/mysql-tables.jpg" width="450">
+<img src="images/mysql-tables2.jpg" width="550">
 
 We will add our password to the Zabbix server config daemon process. Remove has # symbol, and add password, exit & 'Y' to save. 
 
@@ -110,7 +110,7 @@ We will add our password to the Zabbix server config daemon process. Remove has 
 sudo nano /etc/zabbix/zabbix_server.conf
 ```
 
-<img src="images/config-daemon.jpg" width="650">
+<img src="images/config-daemon2.jpg" width="650">
 
 Now we still start Zabbix services:
 
@@ -126,7 +126,7 @@ We want to enable Zabbix server to start on each boot:
 sudo systemctl enable zabbix-server
 ```
 
-<img src="images/enable-on-boot.jpg" width="650">
+<img src="images/enable-on-boot2.jpg" width="650">
 
 ![Enabled](images/start-boot.jpg)
 
