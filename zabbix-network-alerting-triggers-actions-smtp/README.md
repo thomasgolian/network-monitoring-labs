@@ -32,7 +32,7 @@ Ubuntu Zabbix Server running on backend, with web GUI frontend
 <br>monitored host1 & host2 running with Zabbix agents (acting as hosts)
 
 Hostnames:
-Ubuntu-Zabbix-server
+<br>Ubuntu-Zabbix-server
 <br>ubuntu-host-1
 <br>ubuntu-host-2
 
