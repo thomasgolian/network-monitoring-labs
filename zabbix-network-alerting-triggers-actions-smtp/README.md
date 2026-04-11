@@ -226,8 +226,8 @@ sudo systemctl status zabbix-agent
 
 ![Agent Status](images/agent-status.jpg)
 
-We want to check interfaces on the Linux guests, we run ifconfig (install net-tools if needed). We are using NAT so our VMs can get connectivity
-through the host machine running our VM. We ping 8.8.8.8 to make sure we can get out. 
+We want to check interfaces on the Linux guests, we run 'ifconfig' or 'ip a'(install net-tools if needed). We are using NAT so our VMs can get connectivity
+through the host machine running our VMs. We ping 8.8.8.8 to make sure we can get out. 
 
 <img src="images/net-tools-ifconfig.jpg" width="650">
 
