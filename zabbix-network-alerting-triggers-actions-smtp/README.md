@@ -1,4 +1,4 @@
-# Zabbix Network Alerting Workflow Lab (Triggers, Actions, SMTP Alerts)
+# Zabbix Monitoring & Alerting Workflow Lab (Triggers, Actions, SMTP Alerts)
 
 <br>
 
@@ -10,7 +10,7 @@ This lab demonstrates the setup of a basic Zabbix monitoring and alerting system
 
 ## Objectives:
 
-Deploy a functional Zabbix network monitoring environment on Ubuntu
+Deploy a functional Zabbix monitoring environment on Ubuntu
 <br>Configure and register monitored hosts
 <br>Collect system metrics (e.g., CPU, memory, network or availability)
 <br>Create triggers to detect defined threshold conditions
