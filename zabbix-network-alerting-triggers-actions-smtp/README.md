@@ -336,8 +336,7 @@ Name: High CPU utilization (>70% for 1m)
 
 Now that we have the trigger configured, we will again hammer ubuntu-host-1 with the 'yes' process flood to put load on it's CPU. 
 
-Right away the agent on ubuntu-host-1 detects the condition that activates the trigger. The triggered event is now highlighted and blinking
-on the main Zabbix dashboard screen under 'Problems'.
+Right away the agent on ubuntu-host-1 detects the condition that activates the trigger. The triggered event is now highlighted and blinking on the main Zabbix dashboard screen under 'Problems'.
 
 ![Triggered1](images/triggered1.jpg)
 
@@ -365,7 +364,7 @@ Under the Operations tab, we add the Email action. We want to receive an email a
 
 ## Testing our SMTP alerting
 
-Let's again throw a flood of processes on ubuntu-host-1 to put it's CPU on 100% load. We hope to have the trigger event to occur and the configured trigger action to send an email alert to my Email inbox.
+Let's again throw a flood of processes on ubuntu-host-1 to put it's CPU on 100% load. We hope for a condition to trigger an alert, with an email sent to my Gmail inbox.
 
 On first try the Email alert failed: 
 
@@ -409,7 +408,7 @@ We'll bring the agent back up and alive again.
 
 ## Next we flood the RAM memory of the host in hopes to see if the agent detects any conditions from the default, pre-set Zabbix Linux agent triggers.
 
-Install 'stress' (The stress command is a command-line utility for Linux and Unix-like systems used to impose artificial, configurable load on CPU, memory, I/O, and disk subsystems. It helps administrators test system stability, thermal management, and identify performance bottlenecks by simulating high-load <br>scenarios, though it is not a benchmarking tool.) *Stress-ng is newer version* 
+"Install 'stress' (The stress command is a command-line utility for Linux and Unix-like systems used to impose artificial, configurable load on CPU, memory, I/O, and disk subsystems. It helps administrators test system stability, thermal management, and identify performance bottlenecks by simulating high-load <br>scenarios, though it is not a benchmarking tool.)" *Stress-ng is newer version* 
 
 ```
 sudo apt install stress-ng -y
@@ -457,8 +456,7 @@ Before testing, we can view host interfaces metrics by navigating to Monitoring 
 
 ![Latest Data](images/latestdata-interface.jpg)
 
-We can also view network traffic visually on a graph. We'll use the pre-built graphs. Before that we will change how often Zabbix is receiving network
-statistics from the agent. The 'interval'. We navigate to Configuration > Templates > Linux by Zabbix agent (the agent we're using) > Discovery rules > Network interface discovery:
+We can also view network traffic visually on a graph. We'll use the pre-built graphs. Before that we will change how often Zabbix is receiving network statistics from the agent. The 'interval'. We navigate to Configuration > Templates > Linux by Zabbix agent (the agent we're using) > Discovery rules > Network interface discovery:
 
 ![Discovery](images/discovery-interval.jpg)
 
@@ -497,17 +495,26 @@ iperf3 -c <HOST_1_IP> -t 120 -P 8
 ## Key Takeaways
 
 I configured SMTP auth (TLS, ports, app passwords)
-<br>Integrated it into a monitoring workflow
-<br>Debugged failed delivery + user media config
-<br>Validated alerts with live system conditions
-<br>Built a fully functional Zabbix monitoring environment with server and agent-based hosts
-<br>Successfully configured custom triggers for CPU and memory utilization
-<br>Implemented SMTP email alerting using Gmail with app password authentication
 
-Learned to troubleshoot real issues including:
-<br>SMTP authentication failures
-<br>Missing user media configuration
-<br>Incorrect trigger expressions
+Integrated it into a monitoring workflow
+
+Debugged failed delivery + user media config
+
+Validated alerts with live system conditions
+
+Built a fully functional Zabbix monitoring environment with server and agent-based hosts
+
+Successfully configured custom triggers for CPU and memory utilization
+
+Implemented SMTP email alerting using Gmail with app password authentication
+
+## Learned to troubleshoot real issues including:
+
+SMTP authentication failures
+
+Missing user media configuration
+
+Incorrect trigger expressions
 
 ## Testing & Validation
 
@@ -520,10 +527,13 @@ Created memory pressure scenarios using stress-ng to test memory-based triggers
 Watched network traffic visualized through built-in monitoring graphs
 
 ## Verified:
-<br>Triggers fired correctly
-<br>Actions executed as expected
-<br>Email notifications were successfully delivered
-<br>Agents running on hosts successfully reported back to server with live data gathering
+Triggers fired correctly
+
+Actions executed as expected
+
+Email notifications were successfully delivered
+
+Agents running on hosts successfully reported back to server with live data gathering
 
 ## Key Concepts Demonstrated
 
