@@ -423,7 +423,7 @@ stress-ng --vm 1 --vm-bytes 95% --timeout 240s
 
 We can see the host dispatches 'hogs' to begin consuming memory. (A “hog” = a worker process that aggressively consumes a resource)
 
-![RAM hogs](images/ram-hogs.jpg)
+![RAM hogs](images/ram-hogs2.jpg)
 
 We will open a second terminal tab to run this command to watch RAM memory utilization fluctuations per 1.0 second:
 
