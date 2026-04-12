@@ -460,15 +460,15 @@ We can also view network traffic visually on a graph. We'll use the pre-built gr
 
 ![Discovery](images/discovery-interval.jpg)
 
-We change the interval to 5 seconds so the graphs will accurately show the change in network bits flowing between host1 and host2
+We change the interval to 5 seconds so the graphs will accurately show the change in  bits flowing between host1 and host2
 
 ![Interval](images/interval-5s.jpg)
 
-We may also have to change the host's 'network interface discovery' interval to 5s as well:
+We may also have to change the host's ' interface discovery' interval to 5s as well:
 
 ![Interval](images/5s-interval2.jpg)
 
-We'll run this cryptic-looking bash shell loop on host2's terminal - sending a dynamic traffic pattern to host1. Bits sent & bits received, respectively. We can visually see the network traffic passing between the virtual machines, and each agent is providing Zabbix server with the data so we can monitor. The Y axis jumps to measurements in Gbps (It was Kbps before). 
+We'll run this cryptic-looking bash shell loop on host2's terminal - sending a dynamic traffic pattern to host1. Bits sent & bits received, respectively. We can visually see change in bits sent/received value of the network traffic passing between the virtual machines, and each agent is providing Zabbix server with the data so we can monitor. The Y axis jumps to measurements in Gbps (it was Kbps before). 
 
 ```
 while true; do
