@@ -22,8 +22,8 @@ Deploy a functional Zabbix monitoring environment on Ubuntu
 ## Test Scenarios with Triggers, Actions, & Email Alerts
 
 Monitor CPU and RAM utilization on hosts by spiking the load with Linux stress-ng CLI tool 
-Test Zabbix server detecting when the host agent is down / not reachable 
-Utilize iperf3 and Bash CLI tools to generate interface traffic on both hosts
+<br>Test Zabbix server detecting when the host agent is down / not reachable 
+<br>Utilize iperf3 and Bash CLI tools to generate interface traffic on both hosts
 <br>
 
 ### Virtual Machines:
