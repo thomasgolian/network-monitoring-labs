@@ -29,7 +29,7 @@ Monitor CPU and RAM utilization on hosts by spiking the load with Linux stress-n
 ### Virtual Machines:
 
 Ubuntu Zabbix Server running on backend, with web GUI frontend
-<br>monitored host1 & host2 running with Zabbix agents (acting as hosts)
+<br>monitored host1 & host2 running with Zabbix agents
 
 Hostnames:
 <br>Ubuntu-Zabbix-server
